@@ -1,0 +1,555 @@
+[
+    {
+        "topic": "Role of science",
+        "discipline": "Science, Philosophy",
+        "keywords": [
+            "Trust",
+            "distortion",
+            "environmental issues"
+        ]
+    },
+    {
+        "topic": "Social justice",
+        "discipline": "Ethics, Sociology",
+        "keywords": [
+            "Ethical principles",
+            "activism"
+        ]
+    },
+    {
+        "topic": "Narrative",
+        "discipline": "Literature",
+        "keywords": [
+            "Realistic",
+            "fantasy"
+        ]
+    },
+    {
+        "topic": "Utilitarianism",
+        "discipline": "Philosophy",
+        "keywords": [
+            "Moral dilemmas"
+        ]
+    },
+    {
+        "topic": "Film making",
+        "discipline": "Film Studies",
+        "keywords": [
+            "Directing"
+        ]
+    },
+    {
+        "topic": "The Reformation",
+        "discipline": "History, Religion",
+        "keywords": [
+            "Early Catholic Church",
+            "indulgences"
+        ]
+    },
+    {
+        "topic": "Freedom of religion",
+        "discipline": "History, Philosophy",
+        "keywords": [
+            "The Enlightenment"
+        ]
+    },
+    {
+        "topic": "Martin Luther",
+        "discipline": "History, Religion",
+        "keywords": [
+            "Protesting",
+            "civil disobedience"
+        ]
+    },
+    {
+        "topic": "Animal language",
+        "discipline": "Linguistics, Biology",
+        "keywords": [
+            "Communication",
+            "language"
+        ]
+    },
+    {
+        "topic": "Standard English",
+        "discipline": "Linguistics",
+        "keywords": [
+            "Dialects",
+            "language purity"
+        ]
+    },
+    {
+        "topic": "Language",
+        "discipline": "Linguistics, Special Education",
+        "keywords": [
+            "Signing",
+            "language disability"
+        ]
+    },
+    {
+        "topic": "Objectivity vs subjectivity",
+        "discipline": "Philosophy",
+        "keywords": [
+            "Undefined"
+        ]
+    },
+    {
+        "topic": "Print vs paper publishing",
+        "discipline": "Publishing, Literature",
+        "keywords": [
+            "Future of literary publishing"
+        ]
+    },
+    {
+        "topic": "AI writing",
+        "discipline": "Computer Science, Literature",
+        "keywords": [
+            "Robot writers"
+        ]
+    },
+    {
+        "topic": "Invasive species",
+        "discipline": "Biology, Ecology",
+        "keywords": [
+            "Biodiversity",
+            "invasive species",
+            "extinct"
+        ]
+    },
+    {
+        "topic": "Education for Sustainable Development",
+        "discipline": "Education, Sustainability",
+        "keywords": [
+            "Education",
+            "sustainability",
+            "preserve"
+        ]
+    },
+    {
+        "topic": "Aptitude",
+        "discipline": "Psychology, Education",
+        "keywords": [
+            "Aptitude tests",
+            "educational achievement"
+        ]
+    },
+    {
+        "topic": "Moral/ethical indoctrination",
+        "discipline": "Ethics, Education",
+        "keywords": [
+            "Moral education"
+        ]
+    },
+    {
+        "topic": "Gifted education",
+        "discipline": "Education",
+        "keywords": [
+            "Privilege",
+            "natural talent"
+        ]
+    },
+    {
+        "topic": "History of footwear",
+        "discipline": "History, Anthropology",
+        "keywords": [
+            "Climate",
+            "footwear"
+        ]
+    },
+    {
+        "topic": "Ancient Egypt",
+        "discipline": "History, Archaeology",
+        "keywords": [
+            "Egyptology"
+        ]
+    },
+    {
+        "topic": "Media literacy",
+        "discipline": "Media Studies",
+        "keywords": [
+            "Online abuse"
+        ]
+    },
+    {
+        "topic": "Improvisation",
+        "discipline": "Education, Psychology",
+        "keywords": [
+            "Learning",
+            "knowing",
+            "foundational knowledge"
+        ]
+    },
+    {
+        "topic": "The commons",
+        "discipline": "Political Science, Economics",
+        "keywords": [
+            "State",
+            "communal decision making"
+        ]
+    },
+    {
+        "topic": "Ethical justice",
+        "discipline": "Ethics, Philosophy",
+        "keywords": [
+            "Impact",
+            "relativist",
+            "absolute"
+        ]
+    },
+    {
+        "topic": "Diplomacy",
+        "discipline": "International Relations",
+        "keywords": [
+            "Causes of international disputes"
+        ]
+    },
+    {
+        "topic": "Shape of coins",
+        "discipline": "History, Economics",
+        "keywords": [
+            "Undefined"
+        ]
+    },
+    {
+        "topic": "Prices at Christmas",
+        "discipline": "Economics",
+        "keywords": [
+            "Relationship",
+            "prices",
+            "inflation"
+        ]
+    },
+    {
+        "topic": "Concept of space",
+        "discipline": "Anthropology, Psychology",
+        "keywords": [
+            "Proxemics"
+        ]
+    },
+    {
+        "topic": "The nature of knowledge",
+        "discipline": "Philosophy",
+        "keywords": [
+            "Morality",
+            "knowledge",
+            "science"
+        ]
+    },
+    {
+        "topic": "Aging populations",
+        "discipline": "Demography, Sociology",
+        "keywords": [
+            "Demographic shifts"
+        ]
+    },
+    {
+        "topic": "Sources of inequality",
+        "discipline": "Sociology, Education",
+        "keywords": [
+            "Equal education",
+            "redressing inequalities"
+        ]
+    },
+    {
+        "topic": "Financial planning",
+        "discipline": "Finance",
+        "keywords": [
+            "Pensions",
+            "Korean pension"
+        ]
+    },
+    {
+        "topic": "Language learning",
+        "discipline": "Linguistics, Education",
+        "keywords": [
+            "Korean as a foreign language"
+        ]
+    },
+    {
+        "topic": "Urban renewal",
+        "discipline": "Urban Planning, Sustainability",
+        "keywords": [
+            "Sustainable cities",
+            "gentrification"
+        ]
+    },
+    {
+        "topic": "Heritage",
+        "discipline": "Anthropology, History",
+        "keywords": [
+            "Artifact",
+            "memory"
+        ]
+    },
+    {
+        "topic": "Digital journalism",
+        "discipline": "Journalism",
+        "keywords": [
+            "Media bias",
+            "fact checking",
+            "media ethics"
+        ]
+    },
+    {
+        "topic": "Movie review",
+        "discipline": "Film Studies",
+        "keywords": [
+            "Film critique",
+            "screen play",
+            "visual effects"
+        ]
+    },
+    {
+        "topic": "Aims of government",
+        "discipline": "Political Science",
+        "keywords": [
+            "Security",
+            "justice",
+            "conservation"
+        ]
+    },
+    {
+        "topic": "Environmental governance",
+        "discipline": "Environmental Studies",
+        "keywords": [
+            "Management practices"
+        ]
+    },
+    {
+        "topic": "Benefits of competition",
+        "discipline": "Economics",
+        "keywords": [
+            "Outcomes",
+            "competitive practices"
+        ]
+    },
+    {
+        "topic": "Loving authority",
+        "discipline": "Psychology, Parenting",
+        "keywords": [
+            "Parental intervention"
+        ]
+    },
+    {
+        "topic": "Pension plans",
+        "discipline": "Finance",
+        "keywords": [
+            "Financial planning",
+            "union bargaining"
+        ]
+    },
+    {
+        "topic": "Social change",
+        "discipline": "Sociology",
+        "keywords": [
+            "Activism"
+        ]
+    },
+    {
+        "topic": "Robot journalism",
+        "discipline": "Journalism, Computer Science",
+        "keywords": [
+            "AI writing tools",
+            "automated journalism"
+        ]
+    },
+    {
+        "topic": "Intellectual property and copyright",
+        "discipline": "Law",
+        "keywords": [
+            "Benefits",
+            "copyright laws"
+        ]
+    },
+    {
+        "topic": "The solar system and its planets",
+        "discipline": "Astronomy",
+        "keywords": [
+            "Defining planet",
+            "astrophysics"
+        ]
+    },
+    {
+        "topic": "Mathematics in art",
+        "discipline": "Mathematics, Art",
+        "keywords": [
+            "Fibonacci number",
+            "math in nature"
+        ]
+    },
+    {
+        "topic": "Drone technology and design",
+        "discipline": "Engineering, Technology",
+        "keywords": [
+            "Types of drones",
+            "uses"
+        ]
+    },
+    {
+        "topic": "Higgs boson",
+        "discipline": "Physics",
+        "keywords": [
+            "Particle physics",
+            "quantum mechanics"
+        ]
+    },
+    {
+        "topic": "Fear of technological development",
+        "discipline": "Sociology, Technology",
+        "keywords": [
+            "Effects",
+            "benefits"
+        ]
+    },
+    {
+        "topic": "Nanoparticles",
+        "discipline": "Nanotechnology",
+        "keywords": [
+            "Daily life",
+            "uses"
+        ]
+    },
+    {
+        "topic": "Infrastructure development",
+        "discipline": "Urban Planning, Sustainability",
+        "keywords": [
+            "Investment",
+            "sustainable future"
+        ]
+    },
+    {
+        "topic": "Carbon offsets",
+        "discipline": "Environmental Studies",
+        "keywords": [
+            "Carbon neutrality",
+            "net-zero carbons"
+        ]
+    },
+    {
+        "topic": "Microplastics",
+        "discipline": "Environmental Science",
+        "keywords": [
+            "Ocean debris",
+            "microbeads"
+        ]
+    },
+    {
+        "topic": "Climate change",
+        "discipline": "Environmental Science",
+        "keywords": [
+            "Global warming",
+            "greenhouse gases"
+        ]
+    },
+    {
+        "topic": "Weather warning systems",
+        "discipline": "Meteorology",
+        "keywords": [
+            "Trust in science"
+        ]
+    },
+    {
+        "topic": "Body immunity",
+        "discipline": "Biology, Health",
+        "keywords": [
+            "Habits",
+            "immune system"
+        ]
+    },
+    {
+        "topic": "The effect of pandemics on society",
+        "discipline": "Sociology, History",
+        "keywords": [
+            "Adapting",
+            "change",
+            "source of change"
+        ]
+    },
+    {
+        "topic": "Classifying",
+        "discipline": "Biology, Psychology",
+        "keywords": [
+            "Mental organization",
+            "definition of life"
+        ]
+    },
+    {
+        "topic": "AI and human identity",
+        "discipline": "Philosophy, Computer Science",
+        "keywords": [
+            "Effects on humanity",
+            "existentialism"
+        ]
+    },
+    {
+        "topic": "Limits of technology",
+        "discipline": "Technology, Communication",
+        "keywords": [
+            "Human communication",
+            "essentials"
+        ]
+    },
+    {
+        "topic": "Automation's threat to jobs",
+        "discipline": "Economics, Technology",
+        "keywords": [
+            "AI's effect on job market"
+        ]
+    },
+    {
+        "topic": "Music as a source of role models",
+        "discipline": "Music, Sociology",
+        "keywords": [
+            "Art",
+            "human achievements"
+        ]
+    },
+    {
+        "topic": "NFTs",
+        "discipline": "Art, Technology",
+        "keywords": [
+            "Digital ownership"
+        ]
+    },
+    {
+        "topic": "ADHD",
+        "discipline": "Psychology, Health",
+        "keywords": [
+            "Symptoms",
+            "problems"
+        ]
+    },
+    {
+        "topic": "Sports industry",
+        "discipline": "Sports Management",
+        "keywords": [
+            "Sports marketing",
+            "products"
+        ]
+    },
+    {
+        "topic": "Green revolution",
+        "discipline": "Agriculture, Sustainability",
+        "keywords": [
+            "Smart farming",
+            "sustainability"
+        ]
+    },
+    {
+        "topic": "Outcome of evolution",
+        "discipline": "Biology, Ecology",
+        "keywords": [
+            "Fish",
+            "fishing",
+            "evolution",
+            "fish stocks"
+        ]
+    },
+    {
+        "topic": "Aquaculture",
+        "discipline": "Agriculture, Environmental Science",
+        "keywords": [
+            "Environment",
+            "regulation"
+        ]
+    }
+]
