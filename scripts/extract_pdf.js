@@ -38,12 +38,9 @@ async function extractText() {
 
             if (file.endsWith('.pdf')) {
                 const dataBuffer = fs.readFileSync(filePath);
-                // Convert buffer to Uint8Array
                 const uint8Array = new Uint8Array(dataBuffer);
-
                 const loadingTask = pdfjsLib.getDocument(uint8Array);
                 const pdfDocument = await loadingTask.promise;
-
                 const numPages = pdfDocument.numPages;
                 for (let i = 1; i <= numPages; i++) {
                     const page = await pdfDocument.getPage(i);
@@ -55,20 +52,37 @@ async function extractText() {
                 text = fs.readFileSync(filePath, 'utf-8');
             }
 
-            // Simple heuristic to split by "Question" or number patterns
-            const questionRegex = /(\d{1,2})\.\s*(.*?)(?=(\d{1,2}\.)|$)/gs;
-            let match;
-
-            // Clean text a bit
+            // Clean text
             const cleanText = text.replace(/\n\s*\n/g, '\n');
             let foundQuestions = false;
 
+            // Find shared passages [XX ~ YY]
+            const rangeRegex = /\[(\d{1,2})\s*[~～]\s*(\d{1,2})\](.*?)(?=\b\1\.)/gs;
+            const ranges = {};
+            let rangeMatch;
+            while ((rangeMatch = rangeRegex.exec(cleanText)) !== null) {
+                const start = parseInt(rangeMatch[1]);
+                const end = parseInt(rangeMatch[2]);
+                const content = rangeMatch[3].trim();
+                for (let i = start; i <= end; i++) {
+                    ranges[i] = content;
+                }
+            }
+
+            // Extract questions
+            const questionRegex = /(\d{1,2})\.\s*(.*?)(?=(\d{1,2}\.)|$)/gs;
+            let match;
+
             while ((match = questionRegex.exec(cleanText)) !== null) {
                 const questionNum = match[1];
-                const content = match[2].trim();
+                let content = match[2].trim();
+                const qNumInt = parseInt(questionNum);
 
-                if (content.length > 50 && parseInt(questionNum) >= 18) {
+                if (content.length > 50 && qNumInt >= 18) {
                     foundQuestions = true;
+                    if (ranges[qNumInt]) {
+                        content = `[Shared Passage]\n${ranges[qNumInt]}\n\n[Question]\n${content}`;
+                    }
                     passages.push({
                         id: `${file.replace('.pdf', '').replace('.txt', '')}_${questionNum}`,
                         title: `${file} Question ${questionNum}`,
