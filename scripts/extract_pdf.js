@@ -31,6 +31,22 @@ async function extractText() {
 
         const passages = [];
 
+        // Load existing topics to preserve them
+        let existingTopics = {};
+        if (fs.existsSync(outputFile)) {
+            try {
+                const existingData = JSON.parse(fs.readFileSync(outputFile, 'utf-8'));
+                existingData.forEach(p => {
+                    if (p.topics && p.topics.length > 0) {
+                        existingTopics[p.id] = p.topics;
+                    }
+                });
+                console.log(`Loaded existing topics for ${Object.keys(existingTopics).length} passages.`);
+            } catch (e) {
+                console.log('Could not load existing passages for topic preservation.');
+            }
+        }
+
         for (const file of files) {
             console.log(`Processing ${file}...`);
             const filePath = path.join(pdfDir, file);
@@ -53,7 +69,13 @@ async function extractText() {
             }
 
             // Clean text
-            const cleanText = text.replace(/\n\s*\n/g, '\n');
+            // Remove common footers (e.g., "3 8", "로그인 / 회원가입", URLs)
+            let cleanText = text.replace(/\n\s*\n/g, '\n');
+            cleanText = cleanText.replace(/로그인\s*\/\s*회원가입.*?http:\/\/LegendStudy\.com/g, '');
+            cleanText = cleanText.replace(/\d+\s+\d+\s+\d+/g, ''); // Remove page numbers like "3 3 8"
+            cleanText = cleanText.replace(/LegendStudy\.com/g, '');
+            cleanText = cleanText.replace(/이제\s*듣기.*?답을\s*하시기\s*바랍니다\./g, '');
+
             let foundQuestions = false;
 
             // Find shared passages [XX ~ YY]
@@ -70,7 +92,11 @@ async function extractText() {
             }
 
             // Extract questions
-            const questionRegex = /(\d{1,2})\.\s*(.*?)(?=(\d{1,2}\.)|$)/gs;
+            // Stricter regex:
+            // 1. Preceded by whitespace or start of line
+            // 2. Number 18-50 (to avoid small numbers like 1. or 2. in lists)
+            // 3. Dot followed by SPACE (to avoid 42.00)
+            const questionRegex = /(?:^|\s)(\d{1,2})\.\s+(.*?)(?=(?:^|\s)\d{1,2}\.\s+|$)/gs;
             let match;
 
             while ((match = questionRegex.exec(cleanText)) !== null) {
@@ -78,28 +104,35 @@ async function extractText() {
                 let content = match[2].trim();
                 const qNumInt = parseInt(questionNum);
 
-                if (content.length > 50 && qNumInt >= 18) {
+                // Filter out invalid question numbers (Suneung usually starts from 18)
+                if (qNumInt < 18 || qNumInt > 60) continue;
+
+                if (content.length > 50) {
                     foundQuestions = true;
                     if (ranges[qNumInt]) {
                         content = `[Shared Passage]\n${ranges[qNumInt]}\n\n[Question]\n${content}`;
                     }
+                    const id = `${file.replace('.pdf', '').replace('.txt', '')}_${questionNum}`;
                     passages.push({
-                        id: `${file.replace('.pdf', '').replace('.txt', '')}_${questionNum}`,
+                        id: id,
                         title: `${file} Question ${questionNum}`,
                         content: content,
                         source: file,
-                        type: 'reading'
+                        type: 'reading',
+                        topics: existingTopics[id] || []
                     });
                 }
             }
 
             if (!foundQuestions && text.length > 0) {
+                const id = `${file.replace('.pdf', '').replace('.txt', '')}_full`;
                 passages.push({
-                    id: `${file.replace('.pdf', '').replace('.txt', '')}_full`,
+                    id: id,
                     title: `${file} Full Text`,
                     content: text,
                     source: file,
-                    type: 'full_text'
+                    type: 'full_text',
+                    topics: existingTopics[id] || []
                 });
             }
         }
