@@ -2,6 +2,7 @@ import React, { useState, useMemo } from 'react';
 import topicsData from './data/topics.json';
 import passagesData from './data/passages.json';
 import './index.css';
+import PassageModal from './components/PassageModal';
 
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -9,6 +10,8 @@ function App() {
   const [view, setView] = useState('topics'); // 'topics', 'archive', 'search'
   const [selectedPassages, setSelectedPassages] = useState([]);
   const [activeTopic, setActiveTopic] = useState('');
+  const [archiveTopicFilter, setArchiveTopicFilter] = useState('All');
+  const [selectedPassageForModal, setSelectedPassageForModal] = useState(null);
 
   // Extract unique disciplines
   const disciplines = useMemo(() => {
@@ -17,6 +20,17 @@ function App() {
       item.discipline.split(', ').forEach(d => allDisciplines.add(d));
     });
     return ['All', ...Array.from(allDisciplines).sort()];
+  }, []);
+
+  // Extract unique topics from passages for Archive filter
+  const passageTopics = useMemo(() => {
+    const allTopics = new Set();
+    passagesData.forEach(p => {
+      if (p.topics && p.topics.length > 0) {
+        p.topics.forEach(t => allTopics.add(t));
+      }
+    });
+    return ['All', ...Array.from(allTopics).sort()];
   }, []);
 
   // Filter topics
@@ -35,10 +49,10 @@ function App() {
   }, [searchTerm, selectedDiscipline]);
 
   // Filter passages for Archive view (2015-2025)
-  // Currently showing all, but we could add year filtering later if needed.
   const archivePassages = useMemo(() => {
-    return passagesData;
-  }, []);
+    if (archiveTopicFilter === 'All') return passagesData;
+    return passagesData.filter(p => p.topics && p.topics.includes(archiveTopicFilter));
+  }, [archiveTopicFilter]);
 
   const handleSearchLink = (topic, type, keywords = []) => {
     const baseUrl = "https://www.google.com/search?q=";
@@ -61,6 +75,9 @@ function App() {
       const title = p.title.toLowerCase();
       const topicLower = topic.toLowerCase();
 
+      // Check if the passage is explicitly tagged with this topic
+      if (p.topics && p.topics.includes(topic)) return true;
+
       // Simple relevance check
       if (content.includes(topicLower) || title.includes(topicLower)) return true;
       return keywords.some(k => content.includes(k.toLowerCase()));
@@ -75,14 +92,30 @@ function App() {
     <section className="passages-section">
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
         <h2 style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>{title} <span style={{ fontSize: '1rem', fontWeight: 'normal', color: '#666' }}>({passages.length})</span></h2>
-        {view === 'search' && (
-          <button
-            onClick={() => setView('topics')}
-            style={{ padding: '0.5rem 1rem', background: '#eee', border: 'none', borderRadius: '6px', cursor: 'pointer' }}
-          >
-            Back to Topics
-          </button>
-        )}
+
+        <div style={{ display: 'flex', gap: '1rem' }}>
+          {view === 'archive' && (
+            <select
+              value={archiveTopicFilter}
+              onChange={(e) => setArchiveTopicFilter(e.target.value)}
+              style={{ padding: '0.5rem', borderRadius: '6px', border: '1px solid #ddd' }}
+            >
+              <option value="All">All Topics</option>
+              {passageTopics.map(t => (
+                <option key={t} value={t}>{t}</option>
+              ))}
+            </select>
+          )}
+
+          {view === 'search' && (
+            <button
+              onClick={() => setView('topics')}
+              style={{ padding: '0.5rem 1rem', background: '#eee', border: 'none', borderRadius: '6px', cursor: 'pointer' }}
+            >
+              Back to Topics
+            </button>
+          )}
+        </div>
       </div>
 
       {passages.length === 0 ? (
@@ -93,17 +126,28 @@ function App() {
         <div className="passages-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1.5rem' }}>
           {passages.map((passage) => (
             <div key={passage.id} className="passage-card" style={{ background: 'white', padding: '1.5rem', borderRadius: '12px', boxShadow: '0 4px 6px rgba(0,0,0,0.05)', border: '1px solid #eee' }}>
-              <div style={{ marginBottom: '1rem', display: 'flex', justifyContent: 'space-between' }}>
+              <div style={{ marginBottom: '1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                 <span style={{ fontSize: '0.8rem', color: '#666', background: '#f5f5f5', padding: '0.2rem 0.6rem', borderRadius: '4px' }}>{passage.source}</span>
                 <span style={{ fontSize: '0.8rem', color: '#888' }}>{passage.id.split('_').pop()}</span>
               </div>
+
+              {passage.topics && passage.topics.length > 0 && (
+                <div style={{ marginBottom: '0.8rem', display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
+                  {passage.topics.map(t => (
+                    <span key={t} style={{ fontSize: '0.75rem', background: '#e3f2fd', color: '#1565c0', padding: '0.1rem 0.5rem', borderRadius: '12px' }}>
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              )}
+
               <h3 style={{ fontSize: '1.1rem', fontWeight: 'bold', marginBottom: '0.8rem' }}>{passage.title}</h3>
               <p style={{ fontSize: '0.95rem', lineHeight: '1.6', color: '#333', whiteSpace: 'pre-wrap', maxHeight: '200px', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                 {passage.content.length > 200 ? passage.content.substring(0, 200) + '...' : passage.content}
               </p>
               <button
                 style={{ marginTop: '1rem', padding: '0.5rem 1rem', background: 'none', border: '1px solid #ddd', borderRadius: '6px', cursor: 'pointer', fontSize: '0.9rem', width: '100%' }}
-                onClick={() => alert(passage.content)}
+                onClick={() => setSelectedPassageForModal(passage)}
               >
                 Read Full Text
               </button>
@@ -213,7 +257,14 @@ function App() {
           {view === 'archive' && renderPassageList(archivePassages, '2015-2025 Exam Archive')}
         </main>
       </div>
-    </div>
+
+
+      <PassageModal
+        isOpen={!!selectedPassageForModal}
+        onClose={() => setSelectedPassageForModal(null)}
+        passage={selectedPassageForModal}
+      />
+    </div >
   );
 }
 
